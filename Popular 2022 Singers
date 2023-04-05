@@ -79,7 +79,7 @@ VALUES (7, 6);
 INSERT INTO albums (singer_id, Total_albums)
 VALUES (3, 6);
 INSERT INTO albums (singer_id, Total_albums)
-VALUES (6, 7);
+VALUES (8, 4);
 
 ----Joined 2 tables to display singers' Grammy nominations, wins, and current years active 
 SELECT Singers_Bios.first_name, Singers_Bios.last_name, Grammys.Nominations, Grammys.Wins, 2023 - year_started as Active_years FROM Singers_Bios
