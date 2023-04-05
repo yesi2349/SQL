@@ -140,7 +140,7 @@ GROUP BY country;
 --Total number of sales 
 SELECT COUNT (*) FROM sales;
 
---Percentage of sales made my each country 
+--Percentage of sales made by each country 
 SELECT COUNTRY, COUNT (*) as "Percent_of_Sales" FROM sales 
 GROUP BY country ORDER BY "Percent_of_Sales" desc;
 
