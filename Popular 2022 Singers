@@ -1,0 +1,97 @@
+---Created table for the top 10 music artists of 2022 according to Dailymusicroll.com in 2022
+
+CREATE TABLE Singers_Bios (id INTEGER PRIMARY KEY AUTOINCREMENT,
+first_name TEXT,
+last_name TEXT, 
+birth_year INTEGER,
+birthplace TEXT,
+year_started INTEGER);
+
+INSERT INTO Singers_Bios (first_name, last_name, birth_year, birthplace, year_started)
+VALUES ("Ed", "Sheeran", 1991, "West Yorkshire, England", 2004); 
+INSERT INTO Singers_Bios (first_name, last_name, birth_year, birthplace, year_started)
+VALUES ("Billie", "Eilish", 2001, "Los Angeles, California", 2015); 
+INSERT INTO Singers_Bios (first_name, last_name, birth_year, birthplace, year_started)
+VALUES ("Ariana", "Grande", 1993, "Boca Raton, Florida", 2008);
+INSERT INTO Singers_Bios (first_name, last_name, birth_year, birthplace, year_started)
+VALUES ("Taylor", "Swift", 1989, "West Reading, Pennsylvania", 2004);
+INSERT INTO Singers_Bios (first_name, birth_year, birthplace, year_started)
+VALUES ("Adele", 1988, "London, England", 2006);
+INSERT INTO Singers_Bios (first_name, last_name, birth_year, birthplace, year_started)
+VALUES ("Lady", "Gaga", 1986, "New York City, New York", 2001);
+INSERT INTO Singers_Bios (first_name, last_name, birth_year, birthplace, year_started)
+VALUES ("Justin", "Bieber", 1994, "Ontario, Canada", 2007);
+INSERT INTO Singers_Bios (first_name, last_name, birth_year, birthplace, year_started)
+VALUES ("Shawn", "Mendes", 1998, "Ontario, Canada", 2013);
+INSERT INTO Singers_Bios (first_name, last_name, birth_year, birthplace, year_started)
+VALUES ("Dua", "Lipa", 1995, "London, England", 2014);
+INSERT INTO Singers_Bios (first_name, last_name, birth_year, birthplace, year_started)
+VALUES ("Camila", "Cabello", 1997, "Havana, Cuba", 2012);
+
+
+---Created table to show number of grammy wins and nominations according to Grammy.com
+CREATE TABLE Grammys (id INTEGER PRIMARY KEY, 
+singer_id INTEGER,
+Nominations INTEGER, 
+Wins INTEGER);
+
+INSERT INTO Grammys (singer_id, Nominations, Wins)
+VALUES (1, 16, 4);
+INSERT INTO Grammys (singer_id, Nominations, Wins)
+VALUES (10, 4, 0);
+INSERT INTO Grammys (singer_id, Nominations, Wins)
+VALUES (5, 25, 16);
+INSERT INTO Grammys (singer_id, Nominations, Wins)
+VALUES (8, 3, 0);
+INSERT INTO Grammys (singer_id, Nominations, Wins)
+VALUES (6, 36, 13);
+INSERT INTO Grammys (singer_id, Nominations, Wins)
+VALUES (4, 46, 12);
+INSERT INTO Grammys (singer_id, Nominations, Wins)
+VALUES (7, 23, 2);
+INSERT INTO Grammys (singer_id, Nominations, Wins)
+VALUES (9, 8, 3);
+INSERT INTO Grammys (singer_id, Nominations, Wins)
+VALUES (3, 15, 2);
+INSERT INTO Grammys (singer_id, Nominations, Wins)
+VALUES (2, 19, 7);
+
+--Created table demostrating number of albums the top 10 artists have produced
+CREATE TABLE albums (id INTEGER PRIMARY KEY, 
+singer_id INTEGER, Total_albums INTEGER);
+
+INSERT INTO albums (singer_id, Total_albums)
+VALUES (6, 7);
+INSERT INTO albums (singer_id, Total_albums)
+VALUES (9, 2);
+INSERT INTO albums (singer_id, Total_albums)
+VALUES (10, 3);
+INSERT INTO albums (singer_id, Total_albums)
+VALUES (2, 2);
+INSERT INTO albums (singer_id, Total_albums)
+VALUES (1, 5);
+INSERT INTO albums (singer_id, Total_albums)
+VALUES (4, 10);
+INSERT INTO albums (singer_id, Total_albums)
+VALUES (5, 4);
+INSERT INTO albums (singer_id, Total_albums)
+VALUES (7, 6);
+INSERT INTO albums (singer_id, Total_albums)
+VALUES (3, 6);
+INSERT INTO albums (singer_id, Total_albums)
+VALUES (6, 7);
+
+----Joined 2 tables to display singers' Grammy nominations, wins, and current years active 
+SELECT Singers_Bios.first_name, Singers_Bios.last_name, Grammys.Nominations, Grammys.Wins, 2023 - year_started as Active_years FROM Singers_Bios
+LEFT OUTER JOIN Grammys
+ON Singers_Bios.id = Grammys.singer_id
+ORDER BY wins desc;
+
+---Joined 3 sets of tables to display singers' grammy wins and total albums arranged by the number of grammy wins in ascending order
+
+SELECT singer.first_name, singer.last_name, awards.wins as Grammy_Wins, albums.Total_albums FROM Singers_Bios as singer
+JOIN Grammys as awards
+ON singer.id = awards.singer_id
+JOIN albums
+ON singer.id = albums.singer_id
+ORDER BY Grammy_wins asc;
