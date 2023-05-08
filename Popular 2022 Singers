@@ -1,4 +1,4 @@
----Created table for the top 10 music artists of 2022 according to Dailymusicroll.com in 2022
+# I created table and inserted values for the top 10 music artists of 2022 according to Dailymusicroll.com in 2022
 
 CREATE TABLE Singers_Bios (id INTEGER PRIMARY KEY AUTOINCREMENT,
 first_name TEXT,
@@ -29,7 +29,7 @@ INSERT INTO Singers_Bios (first_name, last_name, birth_year, birthplace, year_st
 VALUES ("Camila", "Cabello", 1997, "Havana, Cuba", 2012);
 
 
----Created table to show number of grammy wins and nominations according to Grammy.com
+#I Created table to show number of Grammy wins and nominations according to Grammy.com
 CREATE TABLE Grammys (id INTEGER PRIMARY KEY, 
 singer_id INTEGER,
 Nominations INTEGER, 
@@ -56,7 +56,7 @@ VALUES (3, 15, 2);
 INSERT INTO Grammys (singer_id, Nominations, Wins)
 VALUES (2, 19, 7);
 
---Created table demostrating number of albums the top 10 artists have produced
+# I Created table demostrating number of albums the top 10 artists have produced
 CREATE TABLE albums (id INTEGER PRIMARY KEY, 
 singer_id INTEGER, Total_albums INTEGER);
 
@@ -81,13 +81,13 @@ VALUES (3, 6);
 INSERT INTO albums (singer_id, Total_albums)
 VALUES (8, 4);
 
-----Joined 2 tables to display singers' Grammy nominations, wins, and current years active 
+###Joined 2 tables to display singers' Grammy nominations, wins, and current years active 
 SELECT Singers_Bios.first_name, Singers_Bios.last_name, Grammys.Nominations, Grammys.Wins, 2023 - year_started as Active_years FROM Singers_Bios
 LEFT OUTER JOIN Grammys
 ON Singers_Bios.id = Grammys.singer_id
 ORDER BY wins desc;
 
----Joined 3 sets of tables to display singers' grammy wins and total albums arranged by the number of grammy wins in ascending order
+####Joined 3 sets of tables to display singers' grammy wins and total albums arranged by the number of grammy wins in ascending order
 
 SELECT singer.first_name, singer.last_name, awards.wins as Grammy_Wins, albums.Total_albums FROM Singers_Bios as singer
 JOIN Grammys as awards
