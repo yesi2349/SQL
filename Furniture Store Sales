@@ -119,39 +119,38 @@ INSERT INTO sales(transaction_date,product,price,payment_type,name,city,state,co
 INSERT INTO sales(transaction_date,product,price,payment_type,name,city,state,country,account_created,last_login,latitude,longitude) VALUES ('1/14/09 11:19','Chair',1200,'Visa','Jennifer','Jumeira','Dubayy','United Arab Emirates','1/14/09 10:44','1/14/09 21:26',25.2097222,55.2477778);
 INSERT INTO sales(transaction_date,product,price,payment_type,name,city,state,country,account_created,last_login,latitude,longitude) VALUES ('1/13/09 19:39','Chair',1200,'Visa','Jolene','Englewood','CO','United states','1/6/09 22:00','1/14/09 22:02',39.64778,-104.98722);
 
---What is the min cost item?
-SELECT product, MIN(price) AS lowest_price
+# What is the min and max cost item?
+
+SELECT product, MIN(price) AS lowest_price, MAX(price) AS highest_price
 FROM sales;
 
---What is the max cost item?
-SELECT product, MAX(price) AS highest_price
-FROM sales;
 
---Which countries have sales for chair which is the lowest priced item
+# Which countries have sales for chair which is the lowest priced item
+
 SELECT country
 FROM sales WHERE product IN("Chair")
 GROUP BY country;
 
---Which countries have sales for bed which is the highest priced item
+# Which countries have sales for beds (highest priced item)
 SELECT country
 FROM sales WHERE product IN("Bed")
 GROUP BY country;
 
---Total number of sales 
+# Total number of sales 
 SELECT COUNT (*) FROM sales;
 
---Percentage of sales made by each country 
+# Percentage of sales made by each country 
 SELECT COUNTRY, COUNT (*) as "Percent_of_Sales" FROM sales 
 GROUP BY country ORDER BY "Percent_of_Sales" desc;
 
---What are the most used payment types 
+# What are the most used payment types 
 SELECT "payment_type", COUNT (*) FROM sales group by "payment_type";
 
---Name of countries with the most used payment types 
+# Name of countries with the most used payment types 
 SELECT country, payment_type FROM sales 
 WHERE "payment_type" = "Visa" OR "payment_type" = "Mastercard" GROUP BY country;
 
---Case for specail discount applied for card users with most common payment type
+# Case for specail discount applied for card users with most common payment type
 SELECT payment_type, CASE
 WHEN payment_type = "Visa" THEN "VIP Discount"
 WHEN payment_type = "Mastercard" THEN "Premium Discount"
